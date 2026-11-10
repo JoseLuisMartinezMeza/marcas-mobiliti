@@ -50,17 +50,24 @@
     toggle.addEventListener("click", () => { full.dataset.userPaused = full.paused ? "1" : ""; });
   }
 
-  /* ---------- video facades -> dialog player (no iframe before the click) ---------- */
+  /* ---------- video facades: muted loop in place, full video with sound in the dialog ---------- */
   const player = $("#player"), frame = $(".player-frame", player);
   let lastFacade = null;
   $$(".facade").forEach((b) => b.addEventListener("click", () => {
     lastFacade = b;
-    const url = new URL(b.dataset.embed, location.href);
+    if (/\.mp4$/.test(b.dataset.embed)) {  // our own copy: starts at once, native controls
+      const v = Object.assign(document.createElement("video"), { src: b.dataset.embed, controls: true, autoplay: true, playsInline: true, preload: "auto" });
+      if (b.dataset.poster) v.poster = b.dataset.poster;
+      frame.replaceChildren(v);
+      player.showModal();
+      v.play().catch(() => {});
+      return;
+    }
+    const url = new URL(b.dataset.embed, location.href);  // fallback: platform embed
     url.searchParams.set("autoplay", "1");
     if (url.hostname.includes("youtube")) url.searchParams.set("rel", "0");
     if (url.hostname.includes("vimeo")) url.searchParams.set("dnt", "1");
-    if (/\.mp4(\?|$)/.test(url.pathname)) frame.innerHTML = `<video src="${url.href.split("?")[0]}" controls autoplay playsinline style="width:100%;height:100%"></video>`;
-    else frame.innerHTML = `<iframe src="${url.href}" title="${b.getAttribute("aria-label")}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+    frame.innerHTML = `<iframe src="${url.href}" title="${b.getAttribute("aria-label")}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
     player.showModal();
   }));
   const closeDialog = (d) => d.close();
