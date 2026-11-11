@@ -211,9 +211,6 @@ h1, h2, h3 { color: var(--ink-deep); margin: 0; }
 .proj-strip figcaption b, .credits b { color: var(--ink-deep); font-weight: 600; }
 .credits { list-style: none; padding: 0; margin: var(--s3) 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--s3) var(--s4); }
 .ch-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s3); margin-top: var(--s5); padding-top: var(--s3); border-top: 2px solid var(--rack); }
-.sources { font-size: 14px; }
-.sources summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; color: var(--ink-deep); }
-.sources ul { padding-left: 1.1em; overflow-wrap: anywhere; }
 .chip { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: var(--r-sample); background: var(--rack); color: var(--ink-deep); text-decoration: none; font-weight: 500; }
 
 /* samples tray + contact */
@@ -245,7 +242,7 @@ h1, h2, h3 { color: var(--ink-deep); margin: 0; }
 dialog { border: 0; padding: 0; background: transparent; max-width: min(1100px, 94vw); width: 100%; }
 dialog::backdrop { background: rgb(15 15 17 / .86); }
 #player .player-frame { aspect-ratio: 16 / 9; background: #000; border-radius: var(--r-sample); overflow: hidden; }
-#player iframe, #player video { width: 100%; height: 100%; border: 0; background: #000; }
+#player video { width: 100%; height: 100%; border: 0; background: #000; }
 .close { display: block; margin: 0 0 8px auto; min-height: 44px; padding: 0 16px; border-radius: var(--r-sample); border: 0; background: #fff; color: var(--ink-deep); font: 500 15px var(--text); cursor: pointer; }
 #index-sheet { max-width: 900px; }
 #index-sheet .sheet-grid { background: #fff; border-radius: var(--r-sample); padding: var(--s4); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--s4); max-height: 80vh; overflow: auto; }
