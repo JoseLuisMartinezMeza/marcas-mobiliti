@@ -83,9 +83,11 @@ h1, h2, h3 { color: var(--ink-deep); margin: 0; }
 .rack { list-style: none; margin: 0; padding: var(--s4) var(--gutter) var(--s3); display: flex; gap: var(--s5); overflow-x: auto;
   scroll-snap-type: x proximity; scroll-padding-inline: var(--gutter); overscroll-behavior-x: contain; border-top: 4px solid var(--rule); max-width: 100%; }
 .wall-group { flex: none; scroll-snap-align: start; }
-.wall-cat { font: 500 14px var(--text); color: var(--label); margin: 0 0 var(--s3); }
+.wall-cat { font: 500 14px var(--text); color: var(--label); margin: 0 0 var(--s3); width: max-content; }
 .wall-group > ul { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--s3); }
 .wall-group > ul > li { display: flex; }
+/* with motion on, the page scroll drives the rail sideways (app.js); without it the rail scrolls by hand */
+.rack--driven { overflow: hidden; scroll-snap-type: none; }
 .swatch { display: flex; flex-direction: column; width: 160px; background: #fff; border-radius: var(--r-sample); text-decoration: none; color: var(--ink);
   box-shadow: 0 1px 0 rgb(35 35 39 / .08); transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out); transform-origin: 50% 0; }
 .swatch:hover, .swatch:focus-visible { transform: translateY(-12px); box-shadow: 0 18px 24px -16px rgb(35 35 39 / .35); }
@@ -106,6 +108,7 @@ h1, h2, h3 { color: var(--ink-deep); margin: 0; }
 /* category bands */
 .band { position: relative; height: 70vh; min-height: 420px; overflow: hidden; background: var(--ink-deep); }
 .band:not(.band--pin) { height: 50vh; min-height: 320px; }
+.band--pin { height: calc(100vh - 56px); height: calc(100svh - 56px); }  /* fills the screen under the header while pinned */
 .band-img { position: absolute; inset: 0; }
 .band-img img { width: 100%; height: 100%; object-fit: cover; }
 .band-img.in { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); }
